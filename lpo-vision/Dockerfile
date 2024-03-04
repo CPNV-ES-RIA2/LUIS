@@ -8,7 +8,7 @@ EXPOSE 8080
 CMD [ "npm", "run", "dev" ]
 
 # Stage 2: Production environment
-FROM node:18-alpine AS production
+FROM node:21-alpine AS production
 WORKDIR /app
 COPY package*.json .
 RUN npm install
