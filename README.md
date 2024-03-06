@@ -12,7 +12,9 @@ Beware that this documentation is made for MacOS users. If you are using another
 
 ### Dockerized Application
 
-Make sure you are in the `lpo-vision` folder for the following commands.
+Make sure you are in the `lpo-vision` folder for the following commands and chose the build according to your environment.
+
+When running the docker container, the web application will be accessible at [localhost:8080](http://localhost:8080).
 
 #### Development build
 
