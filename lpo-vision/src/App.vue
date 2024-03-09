@@ -1,6 +1,6 @@
 <template>
   <the-header></the-header>
-  <main class="container">
+  <main class="container mt-3">
     <section>
       <the-analyse-form></the-analyse-form>
     </section>
