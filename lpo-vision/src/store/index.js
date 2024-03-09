@@ -13,6 +13,7 @@ export default createStore({
         { locale: 'PT', name: 'Português' },
       ],
       activeLocale: { locale: 'EN', name: 'English' },
+      labels: [],
     }
   },
   getters,

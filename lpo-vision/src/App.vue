@@ -1,8 +1,11 @@
 <template>
   <the-header></the-header>
-  <main class="container mt-3">
+  <main class="container mt-3 d-flex flex-column gap-3">
     <section>
       <the-analyse-form></the-analyse-form>
+    </section>
+    <section>
+      <the-analyse-result></the-analyse-result>
     </section>
   </main>
 </template>
@@ -10,11 +13,13 @@
 <script>
 import TheHeader from './components/layout/TheHeader.vue'
 import TheAnalyseForm from './views/analyses/TheAnalyseForm.vue'
+import TheAnalyseResult from './views/analyses/TheAnalyseResult.vue'
 
 export default {
   components: {
     TheHeader,
-    TheAnalyseForm
+    TheAnalyseForm,
+    TheAnalyseResult,
   },
 }
 </script>

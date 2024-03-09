@@ -13,4 +13,7 @@ export default {
       context.commit('setActiveLocale', locale)
     }
   },
+  updateLabels(context, payload) {
+    context.commit('setLabels', payload.labels)
+  },
 }

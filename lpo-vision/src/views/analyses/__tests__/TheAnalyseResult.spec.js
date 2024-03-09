@@ -2,14 +2,19 @@
  * @vitest-environment happy-dom
  */
 
-import { describe, it, expect, beforeEach } from 'vitest'
+import { describe, it, expect, beforeEach, beforeAll } from 'vitest'
 import { mount } from '@vue/test-utils'
-import TheAnalyseForm from '../TheAnalyseForm.vue'
+import TheAnalyseResult from '../TheAnalyseResult.vue'
+import store from '../../../store/index.js'
 
 describe('AnalyseResult', () => {
   let wrapper
   beforeEach(() => {
-    wrapper = mount(TheAnalyseForm)
+    wrapper = mount(TheAnalyseResult, {
+      global: {
+        plugins: [store],
+      },
+    })
   })
 
   it('renders a title', () => {
@@ -17,6 +22,13 @@ describe('AnalyseResult', () => {
   })
 
   describe('if there are labels', () => {
+    beforeAll(() => {
+      store.commit('setLabels', [
+        { entity_name: 'Sports uniform', score: 97 },
+        { entity_name: 'Sports jersey', score: 91 },
+      ])
+    })
+
     it('renders the labels', () => {
       expect(wrapper.find('.labels').exists()).toBe(true)
     })
@@ -33,6 +45,10 @@ describe('AnalyseResult', () => {
   })
 
   describe('if there are no labels', () => {
+    beforeAll(() => {
+      store.commit('setLabels', [])
+    })
+
     it("renders 'No labels'", () => {
       expect(wrapper.find('.no-labels').exists()).toBe(true)
     })

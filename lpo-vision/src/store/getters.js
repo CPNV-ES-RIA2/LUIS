@@ -5,4 +5,7 @@ export default {
   getLocales(state) {
     return state.locales
   },
+  getLabels(state) {
+    return state.labels
+  },
 }
