@@ -1,14 +1,20 @@
 <template>
   <the-header></the-header>
-  <main></main>
+  <main class="container">
+    <section>
+      <the-analyse-form></the-analyse-form>
+    </section>
+  </main>
 </template>
 
 <script>
 import TheHeader from './components/layout/TheHeader.vue'
+import TheAnalyseForm from './views/analyses/TheAnalyseForm.vue'
 
 export default {
   components: {
     TheHeader,
+    TheAnalyseForm
   },
 }
 </script>
