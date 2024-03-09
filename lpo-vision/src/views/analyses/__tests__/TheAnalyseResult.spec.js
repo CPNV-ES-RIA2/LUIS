@@ -13,7 +13,7 @@ describe('AnalyseResult', () => {
   })
 
   it('renders a title', () => {
-    expect(wrapper.find('h2').text()).toBe('Analyse result')
+    expect(wrapper.find('h2').text()).toBe('Analysis result')
   })
 
   describe('if there are labels', () => {
