@@ -2,78 +2,63 @@
  * @vitest-environment happy-dom
  */
 
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, beforeEach, beforeAll } from 'vitest'
 import { mount } from '@vue/test-utils'
-import { createPinia } from 'pinia'
-import { defineStore } from 'pinia'
+import store from '../../store/index.js'
 
 import TheLocaleDropdown from '../TheLocaleDropdown.vue'
 
-const pinia = createPinia()
-
-// Mocking Pinia store
-const store = defineStore({
-  id: 'locales',
-  state: () => ({
-    locales: ['en', 'fr', 'de', 'pt'],
-    activeLocale: 'en',
-  }),
-  getters: {
-    activeLocale: (state) => state.activeLocale,
-    locales: (state) => state.locales,
-  },
-})
+// locale mock:
+const mockLocale = {
+  locale: 'FR',
+  name: 'Français',
+}
 
 describe('TheLocaleDropdown', () => {
-  const wrapper = mount(TheLocaleDropdown)
+  let wrapper
+  beforeEach(() => {
+    wrapper = mount(TheLocaleDropdown, {
+      global: {
+        plugins: [store],
+      },
+    })
+  })
 
   it('renders a dropdown', () => {
     expect(wrapper.classes()).toContain('dropdown')
   })
 
   it('renders current locale', () => {
-    expect(wrapper.find('.current-locale').text()).toBe(store.activeLocale)
-  })
-
-  it('renders arrow down icon', () => {
-    expect(wrapper.find('.arrow-down').exists()).toBe(true)
+    expect(wrapper.find('.dropdown-toggle').text()).toBe(
+      wrapper.vm.activeLocale.name,
+    )
   })
 
   describe('when activated', () => {
     beforeEach(async () => {
-      await wrapper.vm.activateDropdown()
-    })
-
-    it('renders arrow up icon', () => {
-      expect(wrapper.find('.arrow-up').exists()).toBe(true)
+      await wrapper.find('.dropdown-toggle').trigger('click')
     })
 
     it('renders locales options', () => {
-      expect(wrapper.findAll('.locale-option').length).toBe(
-        store.locales.length,
-      )
+      expect(wrapper.find('.dropdown-menu').isVisible()).toBe(true)
     })
 
-    describe('when hovering an option', () => {
-      beforeEach(async () => {
-        await wrapper.vm.hoverOption()
+    describe('when option clicked', () => {
+      beforeAll(async () => {
+        // Trigger click on the second dropdown item (Français)
+        await wrapper
+          .find('.dropdown-menu li:nth-child(2) .dropdown-item')
+          .trigger('click')
       })
 
-      it('hovered option has a darker background', () => {
-        expect(wrapper.find('.hovered').exists()).toBe(true)
+      it('renders selected locale', () => {
+        expect(wrapper.find('.dropdown-toggle').text()).toBe('Français')
       })
 
-      describe('when option clicked', () => {
-        beforeEach(async () => {
-          await wrapper.vm.clickOption('fr')
-        })
-
-        it('renders selected locale', () => {
-          expect(wrapper.find('.selected-locale').text()).toBe('fr')
-        })
-
-        it('updates active application locale', () => {
-          expect(store.activeLocale).toBe('fr')
+      it('updates active application locale', () => {
+        expect(wrapper.vm.activeLocale).toEqual({
+          locale: 'FR',
+          name: 'Français',
         })
       })
     })
