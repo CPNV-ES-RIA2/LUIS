@@ -1,0 +1,11 @@
+{
+    "formHeader": "Analisar uma imagem",
+    "fileInputLabel": "Selecionar uma imagem",
+    "minConfidenceLabel": "Confiança mínima",
+    "maxLabelsLabel": "Máximo de rótulos",
+    "submitButton": "Analisar",
+    "resultsHeader": "Resultado da análise",
+    "noResults": "Não foram encontradas etiquetas.",
+    "labelHeader": "Rótulo",
+    "confidenceHeader": "Confiança"
+}

@@ -3,16 +3,26 @@
  */
 
 import { describe, it, expect, beforeEach, beforeAll } from 'vitest'
-import { mount } from '@vue/test-utils'
+import { config, mount } from '@vue/test-utils'
 import TheAnalyseResult from '../TheAnalyseResult.vue'
 import store from '../../../store/index.js'
+import { i18n } from '../../../i18n/index.js'
+
+config.global.stubs = {
+  TheAnalyseResult,
+}
+
+config.global.mocks = {
+  $t: (text) => text,
+}
 
 describe('AnalyseResult', () => {
+  const { t } = useI18n()
   let wrapper
   beforeEach(() => {
     wrapper = mount(TheAnalyseResult, {
       global: {
-        plugins: [store],
+        plugins: [i18n, store],
       },
     })
   })

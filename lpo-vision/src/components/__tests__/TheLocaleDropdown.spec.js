@@ -5,6 +5,7 @@
 import { describe, it, expect, beforeEach, beforeAll } from 'vitest'
 import { mount } from '@vue/test-utils'
 import store from '../../store/index.js'
+import i18n from '../../i18n/index.js'
 
 import TheLocaleDropdown from '../TheLocaleDropdown.vue'
 
@@ -19,7 +20,7 @@ describe('TheLocaleDropdown', () => {
   beforeEach(() => {
     wrapper = mount(TheLocaleDropdown, {
       global: {
-        plugins: [store],
+        plugins: [i18n, store],
       },
     })
   })

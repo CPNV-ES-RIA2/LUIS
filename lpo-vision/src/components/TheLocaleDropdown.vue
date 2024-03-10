@@ -35,6 +35,10 @@ export default {
         },
         selectLocale(locale) {
             this.$store.dispatch('updateActiveLocale', { localeData: locale })
+            this.setI18nLocale(locale.locale)
+        },
+        setI18nLocale(locale) {
+            this.$i18n.locale = locale.toLowerCase()
         },
     },
 }

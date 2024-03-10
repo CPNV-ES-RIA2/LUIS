@@ -13,7 +13,11 @@ export default createStore({
         { locale: 'PT', name: 'Português' },
       ],
       activeLocale: { locale: 'EN', name: 'English' },
-      labels: [],
+      labels: [
+        { entity_name: 'label1', score: '90' },
+        { entity_name: 'label2', score: '72' },
+        { entity_name: 'label3', score: '70' },
+      ],
     }
   },
   getters,

@@ -5,11 +5,16 @@
 import { describe, it, expect, beforeEach } from 'vitest'
 import { mount } from '@vue/test-utils'
 import TheAnalyseForm from '../TheAnalyseForm.vue'
+import { i18n } from '../../../i18n/index.js'
 
 describe('TheAnalyseForm', () => {
   let wrapper
   beforeEach(() => {
-    wrapper = mount(TheAnalyseForm)
+    wrapper = mount(TheAnalyseForm, {
+      global: {
+        plugins: [i18n],
+      },
+    })
   })
 
   it('renders a title', () => {

@@ -21,6 +21,9 @@ export default {
     TheAnalyseForm,
     TheAnalyseResult,
   },
+  created() {
+    this.$store.dispatch('updateActiveLocale', { localeData: { locale: this.$i18n.locale } })
+  },
 }
 </script>
 

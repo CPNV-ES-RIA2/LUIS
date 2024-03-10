@@ -3,7 +3,7 @@
         <section class="card-body d-flex flex-row justify-content-between align-items-center">
             <section class="d-flex flex-column justify-content-center">
                 <h5>
-                    Label name
+                    {{ $t('labelHeader') }}
                 </h5>
                 <p class="fs-4 label-name">
                     {{ label.entity_name }}
@@ -11,7 +11,7 @@
             </section>
             <section class="d-flex flex-column justify-content-center">
                 <h5>
-                    Score
+                    {{ $t('confidenceHeader') }}
                 </h5>
                 <p class="fs-4 label-score">
                     {{ label.score }}%
