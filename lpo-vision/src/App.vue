@@ -10,21 +10,10 @@
   </main>
 </template>
 
-<script>
+<script setup>
 import TheHeader from './components/layout/TheHeader.vue'
 import TheAnalyseForm from './views/analyses/TheAnalyseForm.vue'
 import TheAnalyseResult from './views/analyses/TheAnalyseResult.vue'
-
-export default {
-  components: {
-    TheHeader,
-    TheAnalyseForm,
-    TheAnalyseResult,
-  },
-  created() {
-    this.$store.dispatch('updateActiveLocale', { localeData: { locale: this.$i18n.locale } })
-  },
-}
 </script>
 
 <style>
