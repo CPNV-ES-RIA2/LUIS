@@ -9,13 +9,8 @@
     </header>
 </template>
 
-<script>
+<script setup>
 import TheLocaleDropdown from '../TheLocaleDropdown.vue'
-export default {
-    components: {
-        TheLocaleDropdown,
-    },
-}
 </script>
 
 <style scoped></style>
