@@ -1,45 +1,29 @@
 <template>
-    <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            {{ activeLocale.name }}
+  <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+      {{ selectedLocale }}
+    </button>
+    <ul class="dropdown-menu">
+      <li v-for="locale in availableLocales" :key="locale">
+        <button class="dropdown-item" @click="updateLocale(locale)">
+          {{ locale }}
         </button>
-        <ul class="dropdown-menu">
-            <li v-for="localeData in  locales " :key="localeData.locale">
-                <button class="dropdown-item" @click="selectLocale(localeData)">
-                    {{ localeData.name }}
-                </button>
-            </li>
-        </ul>
-    </div>
+      </li>
+    </ul>
+  </div>
 </template>
 
-<script>
-export default {
-    data() {
-        return {
-            isActive: false,
-            hoveredOption: null,
-        }
-    },
-    computed: {
-        activeLocale() {
-            return this.$store.getters.getActiveLocale
-        },
-        locales() {
-            return this.$store.getters.getLocales.filter(locale => locale != this.activeLocale)
-        },
-    },
-    methods: {
-        toggleDropdown() {
-            this.isActive = !this.isActive
-        },
-        selectLocale(locale) {
-            this.$store.dispatch('updateActiveLocale', { localeData: locale })
-            this.setI18nLocale(locale.locale)
-        },
-        setI18nLocale(locale) {
-            this.$i18n.locale = locale.toLowerCase()
-        },
-    },
+<script setup>
+import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
+
+const { t, locale, availableLocales } = useI18n();
+
+const selectedLocale = computed(() => {
+  return locale.value;
+});
+
+function updateLocale(newLocale) {
+  locale.value = newLocale.toLowerCase();
 }
 </script>
