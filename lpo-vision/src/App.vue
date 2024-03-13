@@ -5,15 +5,23 @@
       <the-analyse-form></the-analyse-form>
     </section>
     <section>
-      <the-analyse-result></the-analyse-result>
+      <the-analyse-result :labels="labels"></the-analyse-result>
     </section>
   </main>
 </template>
 
 <script setup>
-import TheHeader from './components/layout/TheHeader.vue'
-import TheAnalyseForm from './views/analyses/TheAnalyseForm.vue'
-import TheAnalyseResult from './views/analyses/TheAnalyseResult.vue'
+import { ref } from 'vue';
+
+import TheHeader from './components/layout/TheHeader.vue';
+import TheAnalyseForm from './views/analyses/TheAnalyseForm.vue';
+import TheAnalyseResult from './views/analyses/TheAnalyseResult.vue';
+
+const labels = ref([
+  { entity_name: 'Sports', score: 97 },
+  { entity_name: 'Sports Jersey', score: 90 },
+  { entity_name: 'Football Player', score: 85 },
+]);
 </script>
 
 <style>

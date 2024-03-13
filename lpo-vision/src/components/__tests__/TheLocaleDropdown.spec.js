@@ -4,7 +4,7 @@
 
 import { describe, it, expect, beforeEach, beforeAll } from 'vitest';
 import { mount } from '@vue/test-utils';
-import i18n from '../../i18n/index.js';
+import i18n from '@/i18n/index.js';
 
 import TheLocaleDropdown from '../TheLocaleDropdown.vue';
 
