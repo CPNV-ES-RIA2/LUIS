@@ -17,7 +17,7 @@
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-const { t, locale, availableLocales } = useI18n();
+const { locale, availableLocales } = useI18n();
 
 const selectedLocale = computed(() => {
   return locale.value;
