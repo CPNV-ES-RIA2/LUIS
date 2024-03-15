@@ -8,7 +8,8 @@
                     <label for="inputImage" class="form-label">
                         {{ fileInputLabel }}
                     </label>
-                    <input class="form-control" type="file" id="inputImage" accept="image/*" ref="fileInput" />
+                    <input class="form-control" type="file" id="inputImage" accept="image/*" ref="fileInput"
+                        @change="onFileSelected" />
                 </div>
                 <div class="d-flex flex-row gap-3">
                     <div class="mb-3">
@@ -26,6 +27,11 @@
                             v-model.number="maxLabels" />
                     </div>
                 </div>
+
+                <div class="alert alert-danger" role="alert" v-if="!formIsValid">
+                    The form is not valid. Please check the fields and try again.
+                </div>
+
                 <button type="submit" class="btn btn-primary">
                     {{ submitButtonText }}
                 </button>
@@ -43,22 +49,84 @@ const { t } = useI18n();
 const minConfidence = ref(90);
 const maxLabels = ref(5);
 const fileInput = ref(null);
+const formIsValid = ref(true);
+
+function onFileSelected(event) {
+    const selectedFile = event.target.files[0];
+
+    if (isFileValid(selectedFile)) {
+        fileInput.value = selectedFile;
+    } else {
+        alert('Invalid file type or size. Please select a valid image file (png, jpg, jpeg) less than 2MB');
+        fileInput.value = null;
+    }
+}
+
+function isFileValid(file) {
+    const allowedTypes = ['image/png', 'image/jpeg', 'image/jpg'];
+    const maxSize = 2 * 1024 * 1024;
+
+    if (!file) {
+        return false;
+    } else if (!allowedTypes.includes(file.type)) {
+        return false;
+    } else if (file.size > maxSize) {
+        return false;
+    }
+    return true;
+}
+
+function maxLabelsIsValid(maxLabelsValue) {
+    if (!maxLabelsValue) {
+        return false;
+    } else if (maxLabelsValue < 1 || maxLabelsValue > 50) {
+        return false;
+    }
+    return true;
+}
+
+function minConfidenceIsValid(minConfidenceValue) {
+    if (!minConfidenceValue) {
+        return false;
+    } else if (minConfidenceValue < 1 || minConfidenceValue > 100) {
+        return false;
+    }
+    return true;
+}
 
 function submitForm() {
-    const inputImage = document.getElementById('inputImage');
-    const file = inputImage.files[0];
+    formIsValid.value = true;
+    if (
+        !minConfidenceIsValid(minConfidence.value) ||
+        !maxLabelsIsValid(maxLabels.value) ||
+        !isFileValid(fileInput.value)
+    ) {
+        formIsValid.value = false;
+        return;
+    }
     const formData = {
-        image: file,
+        image: fileInput.value,
         minConfidence: minConfidence.value,
         maxLabels: maxLabels.value,
     };
     console.log(formData);
+    // submit request to the server
 }
 
 // i18n translations
-const formHeader = computed(() => { return t('formHeader') })
-const fileInputLabel = computed(() => { return t('fileInputLabel') })
-const minConfidenceLabel = computed(() => { return t('minConfidenceLabel') })
-const maxLabelsLabel = computed(() => { return t('maxLabelsLabel') })
-const submitButtonText = computed(() => { return t('submitButton') })
+const formHeader = computed(() => {
+    return t('formHeader');
+});
+const fileInputLabel = computed(() => {
+    return t('fileInputLabel');
+});
+const minConfidenceLabel = computed(() => {
+    return t('minConfidenceLabel');
+});
+const maxLabelsLabel = computed(() => {
+    return t('maxLabelsLabel');
+});
+const submitButtonText = computed(() => {
+    return t('submitButton');
+});
 </script>
