@@ -2,7 +2,7 @@
   <the-header></the-header>
   <main class="container mt-3 d-flex flex-column gap-3">
     <section>
-      <the-analyse-form></the-analyse-form>
+      <the-analyse-form @form-submitted="onFormSubmitted"></the-analyse-form>
     </section>
     <section>
       <the-analyse-result :labels="labels"></the-analyse-result>
@@ -17,11 +17,17 @@ import TheHeader from './components/layout/TheHeader.vue';
 import TheAnalyseForm from './views/analyses/TheAnalyseForm.vue';
 import TheAnalyseResult from './views/analyses/TheAnalyseResult.vue';
 
-const labels = ref([
-  { entity_name: 'Sports', score: 97 },
-  { entity_name: 'Sports Jersey', score: 90 },
-  { entity_name: 'Football Player', score: 85 },
-]);
+const labels = ref([]);
+
+function onFormSubmitted(formData) {
+  // Call the API to analyse the image
+  // mock the response
+  labels.value = [
+    { entity_name: 'Sports', score: 97 },
+    { entity_name: 'Sports Jersey', score: 90 },
+    { entity_name: 'Football Player', score: 85 },
+  ];
+}
 </script>
 
 <style>

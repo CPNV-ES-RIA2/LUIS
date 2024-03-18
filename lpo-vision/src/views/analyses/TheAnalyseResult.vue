@@ -15,7 +15,7 @@
                         </tr>
                     </thead>
                     <tbody class="table">
-                        <tr v-for="(label, index) in labels" :key="label.entity_name">
+                        <tr class="result" v-for="(label, index) in labels" :key="label.entity_name">
                             <td>{{ index + 1 }}</td>
                             <td class="label-name">{{ label.entity_name }}</td>
                             <td class="label-score">{{ label.score }}</td>

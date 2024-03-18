@@ -17,14 +17,14 @@
                             {{ minConfidenceLabel }}
                         </label>
                         <input type="number" id="inputMinConfidence" class="form-control" min="1" max="100"
-                            v-model.number="minConfidence" />
+                            v-model.number="minConfidence" @change="resetFormValidity" />
                     </div>
                     <div class="mb-3">
                         <label for="inputMaxLabels" class="form-label">
                             {{ maxLabelsLabel }}
                         </label>
                         <input type="number" id="inputMaxLabels" class="form-control" min="1" max="50"
-                            v-model.number="maxLabels" />
+                            v-model.number="maxLabels" @change="resetFormValidity" />
                     </div>
                 </div>
 
@@ -44,6 +44,8 @@
 import { ref, computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 
+const emits = defineEmits(['form-submitted']);
+
 const { t } = useI18n();
 
 const minConfidence = ref(90);
@@ -52,6 +54,7 @@ const fileInput = ref(null);
 const formIsValid = ref(true);
 
 function onFileSelected(event) {
+    resetFormValidity();
     const selectedFile = event.target.files[0];
 
     if (isFileValid(selectedFile)) {
@@ -79,7 +82,7 @@ function isFileValid(file) {
 function maxLabelsIsValid(maxLabelsValue) {
     if (!maxLabelsValue) {
         return false;
-    } else if (maxLabelsValue < 1 || maxLabelsValue > 50) {
+    } else if (maxLabelsValue < 1 && maxLabelsValue > 50) {
         return false;
     }
     return true;
@@ -88,10 +91,14 @@ function maxLabelsIsValid(maxLabelsValue) {
 function minConfidenceIsValid(minConfidenceValue) {
     if (!minConfidenceValue) {
         return false;
-    } else if (minConfidenceValue < 1 || minConfidenceValue > 100) {
+    } else if (minConfidenceValue < 1 && minConfidenceValue > 100) {
         return false;
     }
     return true;
+}
+
+function resetFormValidity() {
+    formIsValid.value = true;
 }
 
 function submitForm() {
@@ -109,8 +116,7 @@ function submitForm() {
         minConfidence: minConfidence.value,
         maxLabels: maxLabels.value,
     };
-    console.log(formData);
-    // submit request to the server
+    emits('form-submitted', formData);
 }
 
 // i18n translations
