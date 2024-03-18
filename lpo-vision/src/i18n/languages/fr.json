@@ -1,0 +1,11 @@
+{
+    "formHeader" : " Analyser une image ",
+    "fileInputLabel" : "Sélectionner une image",
+    "minConfidenceLabel" : "Confiance minimale",
+    "maxLabelsLabel" : "Étiquettes maximales",
+    "submitButton" : "Analyser",
+    "resultsHeader" : "Résultat de l'analyse",
+    "noResults" : "Aucune étiquette trouvée.",
+    "labelHeader" : "Étiquette",
+    "confidenceHeader" : "Confiance"
+}

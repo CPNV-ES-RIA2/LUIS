@@ -1,0 +1,11 @@
+{
+    "formHeader": "Analyse a picture",
+    "fileInputLabel": "Select a picture",
+    "minConfidenceLabel": "Minimum confidence",
+    "maxLabelsLabel": "Maximum labels",
+    "submitButton": "Analyze",
+    "resultsHeader": "Analysis result",
+    "noResults": "No labels found.",
+    "labelHeader": "Label",
+    "confidenceHeader": "Confidence"
+}

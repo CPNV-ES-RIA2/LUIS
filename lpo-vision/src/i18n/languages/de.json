@@ -1,0 +1,11 @@
+{
+    "formHeader": "Analysiere ein Bild",
+    "fileInputLabel": "Wählen Sie ein Bild",
+    "minConfidenceLabel": "Minimales Vertrauen",
+    "maxLabelsLabel": "Maximale Etiketten",
+    "submitButton": "Analysieren",
+    "resultsHeader": "Analyseergebnis",
+    "noResults": "Keine Beschriftungen gefunden.",
+    "labelHeader": "Etikett",
+    "confidenceHeader": "Konfidenz"
+}
