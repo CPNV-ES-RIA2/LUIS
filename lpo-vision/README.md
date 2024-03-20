@@ -2,7 +2,7 @@
 
 ## Recommended IDE Setup
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
 
 ## Customize configuration
 
@@ -54,4 +54,36 @@ docker build --target production -t "lpo-vision:prod" .
 
 ```bash
 docker run -p 8080:8080 lpo-vision:prod
+```
+
+## Testing
+
+### Cypress
+
+You can find Cypress tests at `cypress/e2e` folder.
+
+#### Cypress tests running
+
+First launch your server with npm:
+
+```bash
+npm run dev
+````
+
+Then run the Cypress tests headlessly:
+
+```bash
+npx cypress run
+```
+
+### Vitest
+
+You can find Vitest tests inside a `__tests__` folder close to their respective component (for example, `view/analyes/__tests__`).
+
+#### Vitest tests running
+
+Run tests with npm:
+
+```bash
+npm run test
 ```
