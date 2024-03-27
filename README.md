@@ -1,5 +1,7 @@
 # RIA2 - LUIS
 
+[TOC]
+
 ## Description
 
 This project is part of the RIA2 course at the Centre Professionnel du Nord Vaudois (CPNV). The goal of this project is to create a Rich Internet Application (RIA) that will interact with the microservices created in the last semester BI1 course ([see repository here](https://github.com/lpodev/BI-Project)).
@@ -10,7 +12,33 @@ The user will be able to submit an image analyse request to the microservices to
 
 Beware that this documentation is made for MacOS users. If you are using another OS, you will need to adapt the commands or the installation process.
 
-### Dockerized Application
+### Pre-requisites
+
+- Node.js (version 10.2.4 or higher)
+- Visual Studio Code (or any other IDE) (version 1.85.1 or higher)
+- Docker (25.0.3 or higher)
+
+### Configuration
+
+In order to develop, you will need to install the dependencies with the following command:
+
+```bash
+npm install
+```
+
+### Compile and Hot-Reload for Development
+
+```sh
+npm run dev
+```
+
+### Compile and Minify for Production
+
+```sh
+npm run build
+```
+
+### Docker
 
 Make sure you are in the `lpo-vision` folder for the following commands and chose the build according to your environment.
 
@@ -44,6 +72,38 @@ docker build --target production -t "lpo-vision:prod" .
 docker run -p 8080:8080 lpo-vision:prod
 ```
 
+## Testing
+
+### Cypress
+
+You can find Cypress tests at `cypress/e2e` folder.
+
+#### Cypress tests running
+
+First launch your server with npm:
+
+```bash
+npm run dev
+````
+
+Then run the Cypress tests headlessly:
+
+```bash
+npx cypress run
+```
+
+### Vitest
+
+You can find Vitest tests inside a `__tests__` folder close to their respective component (for example, `view/analyes/__tests__`).
+
+#### Vitest tests running
+
+Run tests with npm:
+
+```bash
+npm run test
+```
+
 ## Directory Structure
 
 ```bash
@@ -51,12 +111,25 @@ docker run -p 8080:8080 lpo-vision:prod
 ├── LICENSE
 ├── README.md
 ├── documentation
-│   └── architecture
-│       ├── architecture_BI-Project.excalidraw
-│       └── architecture_BI-Project.png
+│   ├── architecture
+│   │   ├── architecture_BI-Project.excalidraw
+│   │   └── architecture_BI-Project.png
+│   └── design
+│       ├── lpo-vision-wireframe.fig
+│       └── lpo-vision-wireframe.png
 └── lpo-vision
     ├── Dockerfile
     ├── README.md
+    ├── cypress
+    │   ├── e2e
+    │   │   └── form.spec.cy.js
+    │   ├── fixtures
+    │   │   └── porto-lineup.jpg
+    │   ├── screenshots
+    │   └── support
+    │       ├── commands.js
+    │       └── e2e.js
+    ├── cypress.config.js
     ├── index.html
     ├── jsconfig.json
     ├── package-lock.json
@@ -65,24 +138,32 @@ docker run -p 8080:8080 lpo-vision:prod
     │   └── favicon.ico
     ├── src
     │   ├── App.vue
-    │   ├── assets
-    │   │   ├── base.css
-    │   │   ├── logo.svg
-    │   │   └── main.css
     │   ├── components
-    │   │   ├── HelloWorld.vue
-    │   │   ├── TheWelcome.vue
-    │   │   ├── WelcomeItem.vue
-    │   │   └── icons
-    │   │       ├── IconCommunity.vue
-    │   │       ├── IconDocumentation.vue
-    │   │       ├── IconEcosystem.vue
-    │   │       ├── IconSupport.vue
-    │   │       └── IconTooling.vue
-    │   └── main.js
+    │   │   ├── TheLocaleDropdown.vue
+    │   │   ├── __tests__
+    │   │   │   └── TheLocaleDropdown.spec.js
+    │   │   └── layout
+    │   │       ├── TheHeader.vue
+    │   │       └── __tests__
+    │   │           └── TheHeader.spec.js
+    │   ├── i18n
+    │   │   ├── index.js
+    │   │   └── languages
+    │   │       ├── de.json
+    │   │       ├── en.json
+    │   │       ├── fr.json
+    │   │       └── pt.json
+    │   ├── main.js
+    │   └── views
+    │       └── analyses
+    │           ├── TheAnalyseForm.vue
+    │           ├── TheAnalyseResult.vue
+    │           └── __tests__
+    │               ├── TheAnalyseForm.spec.js
+    │               └── TheAnalyseResult.spec.js
     └── vite.config.js
 
-9 directories, 25 files
+21 directories, 34 files
 ```
 
 ## Collaborate

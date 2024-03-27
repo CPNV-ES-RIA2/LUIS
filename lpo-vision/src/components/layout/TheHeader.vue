@@ -2,7 +2,7 @@
     <header>
         <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
             <div class="container-md">
-                <a class="navbar-brand" href="#">LPOVISION</a>
+                <a class="navbar-brand" href="/">LPOVISION</a>
                 <the-locale-dropdown></the-locale-dropdown>
             </div>
         </nav>

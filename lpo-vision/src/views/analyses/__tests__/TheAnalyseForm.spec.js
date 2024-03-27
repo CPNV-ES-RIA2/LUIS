@@ -33,7 +33,9 @@ describe('TheAnalyseForm', () => {
     });
 
     it('accepts image type only', () => {
-      expect(inputImage.attributes('accept')).toBe('image/*');
+      expect(inputImage.attributes('accept')).toBe(
+        'image/png, image/jpeg, image/jpg',
+      );
     });
 
     it('accepts only single file', () => {
